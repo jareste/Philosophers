@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:03:56 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/27 06:28:24 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:59:26 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*checker(void *data_ptr)
 		if (i == data->philo_num)
 			i = 0;
 		if (data->philos[0].eat_cont == 3)
-			return (0);
+			return (NULL);
 	}
 	return (NULL);
 }
@@ -46,7 +46,7 @@ void	*routine(void *philo_ptr)
 	philo = (t_philo *)philo_ptr;
 	if (philo->id % 2 == 0)
 		ft_usleep(philo->data->eat_time / 10);
-	philo->time_to_die = philo->data->death_time + ft_get_time();
+	// philo->time_to_die = philo->data->death_time + ft_get_time();
 	while (philo->data->dead == 0 && \
 	(philo->eat_cont < philo->data->meals_nb || philo->data->meals_nb == -1))
 		eat_cycle(philo);
@@ -56,7 +56,7 @@ void	*routine(void *philo_ptr)
 		philo->finished = 1;
 		i = 0;
 		while (i < philo->data->philo_num && philo->data->dead == 0)
-			if (philo->data->philos[i].finished == 1 && philo->data->dead == 0)
+			if (philo->data->philos[i].finished == 1)
 				i++;
 		if (i == philo->data->philo_num && philo->data->dead == 0)
 			philo->data->finish_all = 1;
@@ -75,9 +75,10 @@ void	thread_start(t_data *data)
 	i = -1;
 	while (++i < data->philo_num && data->dead == 0)
 	{
+		
+		pthread_join(data->tid[i], NULL);
 		if (i == 0)
 			pthread_create(&data->t1, NULL, &checker, data);
-		pthread_join(data->tid[i], NULL);
 		if (i == 1)
 			pthread_join(data->t1, NULL);
 	}

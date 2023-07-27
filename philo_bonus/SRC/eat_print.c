@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 01:09:29 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/27 09:18:11 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:38:05 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ int	print_state(char *str, t_philo *philo, int aux)
 	aux = 0;
 	actual_time = ft_get_time();
 	actual_time = actual_time - philo->data->start_time;
-	sem_wait(philo->data->write);
 	if (philo->data->dead == 0 && aux == 1)
 	{
+		sem_wait(philo->data->write);
 		if (philo->data->dead == 0)
 			printf("%ld philo %i %s\n", actual_time, philo->id, str);
 		philo->data->dead = 1;
 	}
 	if (philo->data->dead == 0 && aux == 0)
 	{
+		sem_wait(philo->data->write);
 		if (philo->data->dead == 0 && actual_time >= 0)
 			printf("%ld philo %i %s\n", actual_time, philo->id, str);
 	}
@@ -40,31 +41,31 @@ void	eat_cycle(t_philo *philo)
 	// take_fork(philo);
 	while(!philo->data->dead)
 	{
-	sem_wait(philo->data->forks);
-	print_state("took a fork", philo, 0);
-	if (philo->data->philo_num == 1)
-	{
-		ft_usleep(philo->data->death_time);
-		print_state("DIED", philo, 1);
-		return ;
-	}
-	sem_wait(philo->data->forks);
-	print_state("took a fork", philo, 0);
-	philo->eating = 1;
-	print_state("is eating", philo, 0);
-	philo->time_to_die = ft_get_time() + philo->data->death_time;
-	ft_usleep(philo->data->eat_time);
-	philo->eat_cont++;
-	philo->eating = 0;
-	sem_post(philo->data->forks);
-	sem_post(philo->data->forks);
-	if (((philo->eat_cont < philo->data->meals_nb) || \
-	philo->data->meals_nb == -1))
-	{
-		print_state("is sleeping", philo, 0);
-		ft_usleep(philo->data->sleep_time);
-		print_state("is thinking", philo, 0);
-	}
+		sem_wait(philo->data->forks);
+		print_state("took a fork", philo, 0);
+		if (philo->data->philo_num == 1)
+		{
+			ft_usleep(philo->data->death_time);
+			print_state("DIED", philo, 1);
+			return ;
+		}
+		sem_wait(philo->data->forks);
+		print_state("took a fork", philo, 0);
+		philo->eating = 1;
+		print_state("is eating", philo, 0);
+		philo->time_to_die = ft_get_time() + philo->data->death_time;
+		ft_usleep(philo->data->eat_time);
+		philo->eat_cont++;
+		philo->eating = 0;
+		sem_post(philo->data->forks);
+		sem_post(philo->data->forks);
+		if (((philo->eat_cont < philo->data->meals_nb) || \
+		philo->data->meals_nb == -1))
+		{
+			print_state("is sleeping", philo, 0);
+			ft_usleep(philo->data->sleep_time);
+			print_state("is thinking", philo, 0);
+		}
 	}
 }
 
