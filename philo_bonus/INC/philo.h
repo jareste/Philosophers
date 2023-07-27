@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:48:06 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/27 07:50:34 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/27 09:08:38 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,27 @@
 # include <sys/time.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <semaphore.h>
 
 struct	s_data;
 
 typedef struct s_philo
 {
 	struct s_data	*data;
-	pthread_t		t0;
 	int				id;
 	int				eat_cont;
 	int				eating;
 	int				finished;
 	long int		time_to_die;
-	pthread_mutex_t	lock;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
+	pid_t			pid;
 }					t_philo;
 
 typedef struct s_data
 {
-	pthread_t		*tid;
-	pthread_t		t1;
+	// pthread_t		*tid;
+	// pthread_t		t1;
+	pthread_t		t0;
+	pthread_mutex_t	d_check;
 
 	int				philo_num;
 	int				meals_nb;
@@ -49,9 +49,13 @@ typedef struct s_data
 	long int		eat_time;
 	long int		sleep_time;
 	long int		start_time;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	lock;
-	pthread_mutex_t	write;
+	sem_t			*write;
+	sem_t			*forks;
+	// sem_t			*dead;
+
+
+	// pthread_mutex_t	lock;
+	// pthread_mutex_t	write;
 }					t_data;
 
 //init.c doc
