@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:48:06 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/27 07:50:34 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:15:41 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ long int	ft_get_time(void);
 void		ft_clear(t_data	*data);
 
 //print_utils.c
-int			print_state(char *str, t_philo *philo, int aux);
+int			print_state(char *str, t_philo *philo);
+int	print_state_dead(char *str, t_philo *philo);
 int			ft_atoi(const char *str);
 
 //threads.c
