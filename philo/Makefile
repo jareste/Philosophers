@@ -6,7 +6,7 @@
 #    By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 02:37:54 by jareste-          #+#    #+#              #
-#    Updated: 2023/07/27 14:03:52 by jareste-         ###   ########.fr        #
+#    Updated: 2023/07/28 04:40:33 by jareste-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,7 @@ SRCS = $(addprefix $(SRC_PATH)/, philo.c \
 		init.c \
 		eat_print.c)
 
-CC = cc 
-#-g -fsanitize=address
+CC = gcc -g -fsanitize=address
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 

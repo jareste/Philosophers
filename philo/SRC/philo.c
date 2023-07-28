@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 05:57:24 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/27 06:18:35 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/28 03:55:03 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	main(int argc, char **argv)
 		return (1);
 	init_philos(&data);
 	init_forks(&data);
-	thread_start(&data);
+	if (thread_start(&data))
+		return (ft_error("Fatal error ocurred", &data));
 	if (data.finish_all == 1)
 		printf("Simulation ended after %i eats\n", data.philos[0].eat_cont);
 	ft_exit(&data);

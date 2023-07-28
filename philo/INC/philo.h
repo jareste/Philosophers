@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:48:06 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/27 14:15:41 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/28 04:58:19 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ void		ft_clear(t_data	*data);
 
 //print_utils.c
 int			print_state(char *str, t_philo *philo);
-int	print_state_dead(char *str, t_philo *philo);
+int			print_state_dead(char *str, t_philo *philo);
 int			ft_atoi(const char *str);
 
 //threads.c
 void		take_fork(t_philo *philo);
 void		eat_cycle(t_philo *philo);
-void		thread_start(t_data *data);
+int			thread_start(t_data *data);
 
 #endif

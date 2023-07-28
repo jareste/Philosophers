@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 01:09:29 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/27 14:30:36 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/28 04:59:06 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,17 @@ int	print_state_dead(char *str, t_philo *philo)
 	if (data->dead == 0 && actual_time >= 0)
 		printf("%ld philo %i %s\n", actual_time, philo->id, str);
 	philo->data->dead = 1;
+	ft_usleep(300);
 	pthread_mutex_unlock(&data->write);
 	return (0);
 }
 
 void	take_fork(t_philo *philo)
 {
-		pthread_mutex_lock(philo->r_fork);
-		print_state("took a fork", philo);
-		pthread_mutex_lock(philo->l_fork);
-		print_state("took a fork", philo);
-}
-
-void	drop_forks(t_philo *philo)
-{
-	pthread_mutex_unlock(philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_lock(philo->r_fork);
+	print_state("took a fork", philo);
+	pthread_mutex_lock(philo->l_fork);
+	print_state("took a fork", philo);
 }
 
 void	eat_cycle(t_philo *philo)
@@ -71,13 +66,11 @@ void	eat_cycle(t_philo *philo)
 	philo->eat_cont++;
 	pthread_mutex_unlock(&philo->lock);
 	philo->eating = 0;
-	drop_forks(philo);
-	// if (!philo->finished)
-	// {
-		print_state("is sleeping", philo);
-		ft_usleep(philo->data->sleep_time);
-		print_state("is thinking", philo);
-	// }
+	pthread_mutex_unlock(philo->l_fork);
+	pthread_mutex_unlock(philo->r_fork);
+	print_state("is sleeping", philo);
+	ft_usleep(philo->data->sleep_time);
+	print_state("is thinking", philo);
 }
 
 int	ft_atoi(const char *str)

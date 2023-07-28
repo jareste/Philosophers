@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 06:33:11 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/27 12:54:26 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/28 04:57:15 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	init_philos(t_data *data)
 		data->philos[i].eat_cont = 0;
 		data->philos[i].eating = 0;
 		data->philos[i].finished = 0;
-		data->philos[i].time_to_die = data->death_time + ft_get_time();
 		pthread_mutex_init(&data->philos[i].lock, NULL);
 		i++;
 	}
