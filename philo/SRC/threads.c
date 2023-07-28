@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:03:56 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/28 05:29:11 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/28 08:23:07 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	*checker(void *data_ptr)
 	ft_usleep(data->death_time - (data->death_time / 4));
 	while (i++ < data->philo_num && data->dead == 0 && data->finish_all == 0)
 	{
-		// ft_usleep(10);
 		if (i == data->philo_num)
 			i = 0;
 		if (data->philos[i].eating == 0)
@@ -33,15 +32,14 @@ void	*checker(void *data_ptr)
 				print_state_dead("DIED", &data->philos[i]);
 			pthread_mutex_unlock(&data->philos[i].lock);
 		}
-		if (data->philos[0].eat_cont == 3)
-			return (NULL);
+		if (data->philos[i].finished == 1)
+			break ;
 	}
 	return (NULL);
 }
 
 void	*routine(void *philo_ptr)
 {
-	int		i;
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_ptr;
@@ -59,11 +57,6 @@ void	*routine(void *philo_ptr)
 	{
 		print_state("FINISHED", philo);
 		philo->finished = 1;
-		i = 0;
-		while (i < philo->data->philo_num && philo->data->dead == 0)
-			if (philo->data->philos[i].finished == 1)
-				i++;
-		philo->data->finish_all = 1;
 	}
 	return (NULL);
 }

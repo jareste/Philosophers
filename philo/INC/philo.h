@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:48:06 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/28 04:58:19 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/28 08:11:40 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		init_forks(t_data *data);
 
 //utils.c doc
 int			ft_error(char *str, t_data *data);
-int			ft_usleep(useconds_t time);
+void		ft_usleep(long long time);
 void		ft_exit(t_data *data);
 long int	ft_get_time(void);
 void		ft_clear(t_data	*data);

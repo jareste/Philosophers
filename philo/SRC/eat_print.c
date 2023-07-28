@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 01:09:29 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/28 04:59:06 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/28 07:53:10 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 int	print_state(char *str, t_philo *philo)
 {
-	long int	actual_time;
 	t_data		*data;
 
 	data = philo->data;
-	actual_time = ft_get_time();
-	actual_time = actual_time - data->start_time;
-	if (data->dead == 0 && actual_time >= 0)
+	if (data->dead == 0 && ft_get_time() - data->start_time >= 0)
 	{
 		pthread_mutex_lock(&data->write);
-		if (data->dead == 0 && actual_time >= 0)
-			printf("%ld philo %i %s\n", actual_time, philo->id, str);
+		if (data->dead == 0 && ft_get_time() - data->start_time >= 0)
+			printf("%ld philo %i %s\n", ft_get_time() - \
+			data->start_time, philo->id, str);
 		pthread_mutex_unlock(&data->write);
 	}
 	return (0);

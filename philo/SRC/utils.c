@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 05:53:18 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/28 00:49:53 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/28 08:13:11 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,15 @@ long int	ft_get_time(void)
 {
 	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL))
-		return (ft_error("gettimeofday() FAILURE\n", NULL));
-	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int	ft_usleep(useconds_t time)
+void	ft_usleep(long long time)
 {
-	u_int64_t	start;
-
-	start = ft_get_time();
-	while ((ft_get_time() - start) < time)
-		usleep(time / 10);
-	return (0);
+	time += ft_get_time();
+	while (ft_get_time() <= time)
+		usleep(200);
 }
 
 int	ft_error(char *str, t_data *data)
