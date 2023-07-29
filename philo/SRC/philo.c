@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 05:57:24 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/28 08:22:42 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:07:54 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static void	check_finish(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->philo_num && data->dead == 0)
-		{
-			usleep(1000);
-			if (data->philos[i].finished == 1)
-				i++;
-		}
-		printf("Simulation ended after %i eats\n", data->philos[0].eat_cont);
+	{
+		usleep(1000);
+		if (data->philos[i].finished == 1)
+			i++;
+	}
+	printf("Simulation ended after %i eats\n", data->philos[0].eat_cont);
 }
 
 int	main(int argc, char **argv)

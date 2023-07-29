@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 06:33:11 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/28 04:57:15 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:04:21 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_philos(t_data *data)
 	}
 }
 
-int	start_arrays(t_data *data)
+static int	start_arrays(t_data *data)
 {
 	data->tid = malloc(sizeof(pthread_t) * data->philo_num);
 	if (!data->tid)

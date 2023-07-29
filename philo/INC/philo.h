@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:48:06 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/28 08:11:40 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:07:11 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_data
 {
 	pthread_t		*tid;
 	pthread_t		t1;
-
 	int				philo_num;
 	int				meals_nb;
 	int				dead;
@@ -56,7 +55,6 @@ typedef struct s_data
 
 //init.c doc
 int			init_data(t_data *data, char **argv);
-int			start_arrays(t_data *data);
 void		init_philos(t_data *data);
 int			check_args(int argc, char **argv);
 void		init_forks(t_data *data);
@@ -68,14 +66,13 @@ void		ft_exit(t_data *data);
 long int	ft_get_time(void);
 void		ft_clear(t_data	*data);
 
-//print_utils.c
+//eat_print.c
 int			print_state(char *str, t_philo *philo);
 int			print_state_dead(char *str, t_philo *philo);
 int			ft_atoi(const char *str);
+void		eat_cycle(t_philo *philo);
 
 //threads.c
-void		take_fork(t_philo *philo);
-void		eat_cycle(t_philo *philo);
 int			thread_start(t_data *data);
 
 #endif

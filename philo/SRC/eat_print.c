@@ -6,7 +6,7 @@
 /*   By: jareste- <jareste-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 01:09:29 by jareste-          #+#    #+#             */
-/*   Updated: 2023/07/28 07:53:10 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:06:30 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	print_state_dead(char *str, t_philo *philo)
 	return (0);
 }
 
-void	take_fork(t_philo *philo)
+static void	take_fork(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	print_state("took a fork", philo);
